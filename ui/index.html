@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>DzRide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="leaflet.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  </head>
+  <body>
+    <div id="phone-wrapper">
+      <div class="app" data-theme="dark">
+        <!-- ============ Screen: Welcome / Phone ============ -->
+        <section id="screen-welcome" class="screen show">
+          <div class="brand">
+            <svg width="108" height="36" viewBox="0 0 108 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 28L16.5 8h7.2L12.6 28H6Z" fill="#8A2BE2"/>
+              <path d="M23.5 8h7l-6.6 12.2c-1 1.8-3.7 1.7-4.6-.1L23.5 8Z" fill="#FF2E6C"/>
+              <text x="38" y="26" font-family="Poppins" font-weight="800" font-size="20" fill="#2B1652">DzRide</text>
+            </svg>
+          </div>
+
+          <div class="hero">
+            <!-- Illustration (inline svg) -->
+            <svg viewBox="0 0 420 240" class="hero-svg" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#FF2E6C"/><stop offset="1" stop-color="#8A2BE2"/>
+                </linearGradient>
+              </defs>
+              <rect x="10" y="20" rx="14" ry="14" width="120" height="80" fill="#fff2"/>
+              <rect x="290" y="32" rx="14" ry="14" width="110" height="70" fill="#fff2"/>
+              <circle cx="210" cy="120" r="68" fill="#4c3b91" opacity="0.1"/>
+              <g transform="translate(150,110)">
+                <rect x="-60" y="-30" width="120" height="60" rx="12" fill="#fff"/>
+                <rect x="-46" y="10" width="92" height="10" rx="5" fill="#e7e7f5"/>
+                <path d="M-36,5 l26,-12 h44 l20,12 v18 h-90Z" fill="url(#g1)"/>
+                <circle cx="-18" cy="24" r="8" fill="#fff"/>
+                <circle cx="46" cy="24" r="8" fill="#fff"/>
+              </g>
+            </svg>
+          </div>
+
+          <div class="welcome-copy">
+            <h1>All your needs in one app!</h1>
+            <p>Enjoy your favorite cuisines from the best restaurants, shop from local stores and go anywhere you want with peace of mind.</p>
+          </div>
+
+          <div class="form">
+            <label>Phone number</label>
+            <div class="phone-input">
+              <span class="flag">🇩🇿</span>
+              <span class="sep">+</span>
+              <input id="phone" type="tel" placeholder="+213 1234567" />
+            </div>
+            <button id="btnWelcomeNext" class="btn giant pri">Continue</button>
+          </div>
+        </section>
+
+        <!-- ============ Screen: Home Map + Bottom Sheet ============ -->
+            <section id="screen-home" class="screen">
+            <div id="homeMap" class="map"></div>
+
+            <!-- شارة البحث أعلى الخريطة -->
+            <div class="floating ui-badge" id="searchBubble">Search…</div>
+
+            <!-- زر السائق العائم (خارج البطاقة) -->
+            <button id="btnDriver" class="driver-fab">Me</button>
+
+            <!-- البطاقة السفلية -->
+            <div class="bottom-sheet">
+                <h2>Where would you like to go?</h2>
+                <p class="muted">Enter your destination by tapping the bottom bar.</p>
+                <button id="btnOpenCustomize" class="input-like">
+                <span class="radio-dot"></span>
+                <span>Destination</span>
+                <span class="chev">›</span>
+                </button>
+            </div>
+            </section>
+
+
+        <!-- ============ Screen: Customize Ride ============ -->
+        <section id="screen-customize" class="screen">
+          <div class="toolbar">
+            <button class="tool-back" id="backFromCustomize">‹</button>
+            <h2>Customize your ride</h2>
+            <div style="width:40px"></div>
+          </div>
+
+          <div class="form panel">
+            <div class="radio-input active" data-kind="pickup">
+              <span class="radio"></span>
+              <input id="pickupInput" type="text" placeholder="Set your location" />
+              <button class="plus" title="Set via map" id="setPickupMap">+</button>
+            </div>
+            <div class="radio-input" data-kind="destination">
+              <span class="radio"></span>
+              <input id="destInput" type="text" placeholder="Search for a location" />
+              <button class="plus" title="Set via map" id="setDestMap">+</button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Saved addresses</h3>
+            <div class="chips">
+              <button class="chip" id="chipHome">🏠 Add home</button>
+              <button class="chip" id="chipWork">💼 Add work</button>
+              <button class="chip">＋ Other</button>
+            </div>
+          </div>
+
+          <div class="panel list">
+            <button id="useCurrent" class="row-item">
+              <span class="ico">◎</span>
+              <span>Use my current location</span>
+            </button>
+            <button id="chooseOnMap" class="row-item">
+              <span class="ico">🗺️</span>
+              <span>Choose on the map</span>
+            </button>
+          </div>
+
+          <button id="btnCustomizeNext" class="btn giant pri disabled">Next</button>
+        </section>
+
+        <!-- ============ Screen: Pick on Map (full) ============ -->
+        <section id="screen-pick" class="screen">
+          <div class="toolbar">
+            <button class="tool-back" id="backFromPick">‹</button>
+            <h2 id="pickTitle">Choose your destination</h2>
+            <div style="width:40px"></div>
+          </div>
+          <div id="pickMap" class="map"></div>
+
+          <!-- Center pin -->
+          <div class="pin-wrap">
+            <div class="pin-dot"></div>
+            <div class="pin-ring"></div>
+          </div>
+
+          <div class="bottom-sheet">
+            <p id="pickedAddress" class="address">—</p>
+            <button id="btnPickContinue" class="btn giant pri">Continue</button>
+          </div>
+
+          
+        </section>
+
+        <!-- ============ Screen: Driver (Incoming Requests) ============ -->
+            <section id="screen-driver" class="screen">
+            <div class="toolbar">
+                <button class="tool-back" id="backFromDriver">‹</button>
+                <h2>Driver — Requests</h2>
+                <div style="width:40px"></div>
+            </div>
+
+            <div id="driverList" class="driver-list panel" style="margin-top:10px;">
+                <!-- تُملأ من السكربت -->
+            </div>
+            </section>
+
+      </div>
+    </div>
+
+    <script src="leaflet.js"></script>
+    <script src="script.js"></script>
+    <script>
+      // Boot after LB-Phone components are ready
+      window.addEventListener('message', (e) => {
+        if (e.data === 'componentsLoaded') {
+          window.DzRideBoot && window.DzRideBoot();
+        }
+      });
+    </script>
+  </body>
+</html>

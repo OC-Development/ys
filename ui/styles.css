@@ -1,0 +1,195 @@
+:root{
+  --bg:#F4F2FA;
+  --text:#1A1632;
+  --muted:#6B6690;
+  --panel:#ffffff;
+  --line:#E6E2F3;
+  --brand:#2B1652;      /* deep purple */
+  --brand2:#8A2BE2;     /* electric purple */
+  --accent:#C9FF17;     /* lime */
+  --shadow:0 12px 30px rgba(32,16,64,.15);
+}
+
+*{ box-sizing:border-box; }
+html, body, #phone-wrapper, .app{ width:100%; height:100%; margin:0; }
+body{ font-family:Poppins, ui-sans-serif, system-ui; background:transparent; color:var(--text); }
+
+.app{ background:var(--bg); position:relative; overflow:hidden; }
+
+/* ===== screens ===== */
+.screen{ position:absolute; inset:0; overflow-y:auto; display:none; }
+.screen.show{ display:block; }
+
+/* ===== Welcome ===== */
+.brand{ display:flex; justify-content:center; padding:20px 0 10px; }
+.hero{ display:flex; justify-content:center; }
+.hero-svg{ width:90%; max-width:420px; height:auto; filter: drop-shadow(0 12px 24px rgba(0,0,0,.08)); }
+.welcome-copy{ text-align:center; padding:12px 18px 4px; }
+.welcome-copy h1{ font-size:22px; font-weight:800; margin:0 0 6px; color:var(--brand); }
+.welcome-copy p{ font-size:13px; color:var(--muted); margin:0; }
+
+.form{ padding:12px 18px 18px; }
+.form label{ display:block; font-weight:700; margin:10px 0 6px; color:var(--brand); }
+.phone-input{
+  display:flex; align-items:center; gap:8px; background:var(--panel);
+  border:1px solid var(--line); border-radius:14px; padding:12px 14px; box-shadow:var(--shadow);
+}
+.phone-input input{ flex:1; border:0; outline:0; font-size:14px; }
+.flag{ font-size:18px; }
+.sep{ color:#b7b3cd; }
+
+/* ===== Buttons ===== */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  border:0; border-radius:16px; padding:12px 14px; font-weight:800; cursor:pointer;
+  transition:transform .06s ease, filter .15s ease;
+}
+.btn:active{ transform:translateY(1px) scale(.995); }
+.btn.pri{
+  background:linear-gradient(135deg, var(--brand), var(--brand2)); color:#fff;
+  box-shadow:0 12px 24px rgba(43,22,82,.25);
+}
+.btn.giant{ width:calc(100% - 36px); margin:14px 18px 18px; font-size:16px; }
+.btn.disabled{ opacity:.5; pointer-events:none; }
+
+/* ===== Map & floating UI ===== */
+.map{ position:absolute; inset:0; }
+.floating.ui-badge{
+  position:absolute; top:16px; left:50%; transform:translateX(-50%);
+  background:#2A1E52; color:#fff; font-weight:700; padding:10px 14px; border-radius:16px;
+  box-shadow:var(--shadow);
+}
+
+/* ===== Bottom sheet ===== */
+.bottom-sheet{
+  position:absolute; left:0; right:0; bottom:0;
+  background:var(--panel); border-top-left-radius:22px; border-top-right-radius:22px;
+  box-shadow:0 -8px 30px rgba(0,0,0,.08); padding:14px 16px 22px; border-top:1px solid var(--line);
+}
+.bottom-sheet h2{ margin:4px 0 2px; font-size:18px; font-weight:800; color:var(--brand); }
+.bottom-sheet p.muted{ margin:0 0 10px; color:var(--muted); }
+
+/* input-like button */
+.input-like{
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  width:100%; padding:14px; margin-top:8px; border-radius:16px; border:1px solid var(--line);
+  background:var(--panel); box-shadow:var(--shadow); font-weight:700; color:var(--brand);
+}
+.radio-dot{ width:16px; height:16px; border-radius:50%; border:2px solid var(--brand2); display:inline-block; }
+.chev{ font-size:20px; color:#7f72bd; }
+
+/* ===== Toolbar ===== */
+.toolbar{
+  position:sticky; top:0; z-index:2;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 12px; background:var(--bg); border-bottom:1px solid var(--line);
+}
+.tool-back{
+  width:36px; height:36px; border-radius:12px; border:1px solid var(--line);
+  background:var(--panel); font-weight:800; cursor:pointer;
+}
+.toolbar h2{ font-size:18px; margin:0; font-weight:800; color:var(--brand); }
+
+/* ===== Panels / rows ===== */
+.panel{ margin:12px 12px; background:var(--panel); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); padding:12px; }
+.panel.list{ padding:0; overflow:hidden; }
+h3{ margin:0 0 8px; font-size:14px; color:var(--brand); }
+
+.radio-input{
+  display:flex; align-items:center; gap:10px; border:1px solid var(--line);
+  background:#fff; border-radius:14px; padding:10px 12px; margin-bottom:10px;
+}
+.radio-input .radio{
+  width:18px; height:18px; border-radius:50%; border:2px solid #CFCBE6; background:#fff; display:inline-block;
+}
+.radio-input.active .radio{ border-color:var(--brand2); box-shadow:0 0 0 3px #e9d9ff inset; }
+.radio-input input{ flex:1; border:0; outline:0; font-size:14px; }
+.radio-input .plus{
+  width:30px; height:30px; border-radius:10px; border:1px solid var(--line); background:#fff; font-weight:800; cursor:pointer;
+}
+
+.chips{ display:flex; gap:8px; flex-wrap:wrap; }
+.chip{
+  border:1px solid var(--line); background:#fff; border-radius:999px; padding:8px 12px; font-weight:700; color:var(--brand);
+}
+
+.row-item{
+  width:100%; display:flex; align-items:center; gap:10px; padding:14px; background:#fff; border:0; border-bottom:1px solid var(--line); font-weight:700;
+}
+.row-item:last-child{ border-bottom:0; }
+.row-item .ico{ width:22px; text-align:center; }
+
+/* ===== Pick map pin ===== */
+.pin-wrap{ position:absolute; left:50%; top:50%; transform:translate(-50%,-54%); pointer-events:none; }
+.pin-dot{ width:18px; height:18px; border-radius:50%; background:#FF9D00; border:3px solid #fff; box-shadow:0 3px 12px rgba(0,0,0,.25); }
+.pin-ring{ width:8px; height:8px; margin:6px auto 0; border-radius:50%; background:#000; opacity:.4; }
+
+/* ===== Toast ===== */
+.mtx-toast{
+  position:absolute; left:50%; bottom:24px; transform:translateX(-50%) translateY(12px);
+  opacity:0; transition:all .25s ease; padding:10px 12px; border-radius:12px;
+  background:#2A1E52; color:#fff; border:1px solid #3c2a73; box-shadow:var(--shadow);
+  font:700 12px Poppins,ui-sans-serif; z-index:9;
+}
+.mtx-toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* small screens */
+@media (max-width:360px){
+  .btn.giant{ font-size:15px; }
+}
+
+
+/* ===== Fix: map covering all UI ===== */
+:root{
+  --z-map: 0;
+  --z-float: 20;      /* شارة Search، إلخ */
+  --z-toolbar: 30;    /* شريط العنوان */
+  --z-sheet: 40;      /* البطاقة السفلية */
+  --z-pin: 35;        /* دبوس المنتصف */
+  --z-modal: 1000;    /* أي مودال */
+}
+
+/* تأكد أن الحاويات “positioned” لتشتغل z-index */
+.app{ position: relative; }
+.screen{ position: absolute; inset: 0; }
+
+/* الخريطة في أدنى طبقة */
+.map{ position: absolute; inset: 0; z-index: var(--z-map); }
+
+/* عناصر الواجهة فوق الخريطة */
+.toolbar{ position: sticky; top:0; z-index: var(--z-toolbar); }
+.floating.ui-badge{ position: absolute; z-index: var(--z-float); }
+.bottom-sheet{ position: absolute; left:0; right:0; bottom:0; z-index: var(--z-sheet); }
+.pin-wrap{ position: absolute; z-index: var(--z-pin); pointer-events: none; }
+
+/* مودالات إن وجدت */
+.modal{ position: fixed; inset:0; z-index: var(--z-modal); }
+
+/* اختياري: منع الـLeaflet من إنشاء طبقة أعلى من واجهتك */
+.leaflet-container{ z-index: 0; }
+
+
+/* Driver FAB */
+.driver-fab{
+  position:absolute; top:12px; right:12px; z-index:var(--z-float);
+  width:40px; height:40px; border-radius:14px; border:1px solid var(--line);
+  background:var(--panel); color:var(--brand); font-weight:800; box-shadow:var(--shadow);
+}
+
+/* Driver list */
+.driver-list{ display:flex; flex-direction:column; gap:10px; }
+.req-card{
+  display:grid; grid-template-columns: 1fr auto; gap:10px;
+  background:#fff; border:1px solid var(--line); border-radius:16px; padding:12px;
+}
+.req-main{ display:flex; flex-direction:column; gap:6px; }
+.req-title{ font-weight:800; color:var(--brand); }
+.req-sub{ font-size:12px; color:var(--muted); }
+
+.req-form{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.req-form input{
+  width:90px; padding:8px 10px; border-radius:10px; border:1px solid var(--line);
+  outline:none;
+}
+.req-actions{ display:flex; gap:8px; align-items:center; }
+.badge{ font-size:12px; padding:6px 8px; border-radius:999px; background:#f1f0fa; color:#5d5496; }

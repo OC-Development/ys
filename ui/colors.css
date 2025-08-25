@@ -1,0 +1,3 @@
+/* optional theme helpers; you can extend if needed */
+.app[data-theme="dark"]  { --theme-name: 'dark'; }
+.app[data-theme="light"] { --theme-name: 'light'; }
