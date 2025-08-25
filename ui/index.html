@@ -13,156 +13,195 @@
   <body>
     <div id="phone-wrapper">
       <div class="app" data-theme="dark">
-        <!-- ============ Screen: Welcome / Phone ============ -->
-        <section id="screen-welcome" class="screen show">
-          <div class="brand">
-            <svg width="108" height="36" viewBox="0 0 108 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 28L16.5 8h7.2L12.6 28H6Z" fill="#8A2BE2"/>
-              <path d="M23.5 8h7l-6.6 12.2c-1 1.8-3.7 1.7-4.6-.1L23.5 8Z" fill="#FF2E6C"/>
-              <text x="38" y="26" font-family="Poppins" font-weight="800" font-size="20" fill="#2B1652">DzRide</text>
-            </svg>
-          </div>
-
-          <div class="hero">
-            <!-- Illustration (inline svg) -->
-            <svg viewBox="0 0 420 240" class="hero-svg" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#FF2E6C"/><stop offset="1" stop-color="#8A2BE2"/>
-                </linearGradient>
-              </defs>
-              <rect x="10" y="20" rx="14" ry="14" width="120" height="80" fill="#fff2"/>
-              <rect x="290" y="32" rx="14" ry="14" width="110" height="70" fill="#fff2"/>
-              <circle cx="210" cy="120" r="68" fill="#4c3b91" opacity="0.1"/>
-              <g transform="translate(150,110)">
-                <rect x="-60" y="-30" width="120" height="60" rx="12" fill="#fff"/>
-                <rect x="-46" y="10" width="92" height="10" rx="5" fill="#e7e7f5"/>
-                <path d="M-36,5 l26,-12 h44 l20,12 v18 h-90Z" fill="url(#g1)"/>
-                <circle cx="-18" cy="24" r="8" fill="#fff"/>
-                <circle cx="46" cy="24" r="8" fill="#fff"/>
-              </g>
-            </svg>
-          </div>
-
-          <div class="welcome-copy">
-            <h1>All your needs in one app!</h1>
-            <p>Enjoy your favorite cuisines from the best restaurants, shop from local stores and go anywhere you want with peace of mind.</p>
-          </div>
-
-          <div class="form">
-            <label>Phone number</label>
-            <div class="phone-input">
-              <span class="flag">🇩🇿</span>
-              <span class="sep">+</span>
-              <input id="phone" type="tel" placeholder="+213 1234567" />
-            </div>
-            <button id="btnWelcomeNext" class="btn giant pri">Continue</button>
-          </div>
-        </section>
-
         <!-- ============ Screen: Home Map + Bottom Sheet ============ -->
-            <section id="screen-home" class="screen">
+        <section id="screen-home" class="screen show">
+          <!-- Header with Uber branding -->
+          <div class="app-header">
+            <div class="brand-logo">
+              <svg width="80" height="24" viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="80" height="24" rx="4" fill="#000"/>
+                <text x="40" y="16" text-anchor="middle" font-family="Poppins" font-weight="800" font-size="12" fill="#fff">UBER</text>
+              </svg>
+            </div>
+            <div class="location-info">
+              <div class="current-location">
+                <span class="location-icon">📍</span>
+                <span class="location-text">Current Location</span>
+              </div>
+            </div>
+          </div>
+
             <div id="homeMap" class="map"></div>
 
-            <!-- شارة البحث أعلى الخريطة -->
-            <div class="floating ui-badge" id="searchBubble">Search…</div>
+            <!-- User location button -->
+            <button class="location-btn" id="centerLocation">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+                <circle cx="10" cy="10" r="2" fill="currentColor"/>
+              </svg>
+            </button>
 
-            <!-- زر السائق العائم (خارج البطاقة) -->
+            <!-- Driver mode button -->
             <button id="btnDriver" class="driver-fab">Me</button>
 
-            <!-- البطاقة السفلية -->
+            <!-- Main ride booking card -->
             <div class="bottom-sheet">
-                <h2>Where would you like to go?</h2>
-                <p class="muted">Enter your destination by tapping the bottom bar.</p>
-                <button id="btnOpenCustomize" class="input-like">
-                <span class="radio-dot"></span>
-                <span>Destination</span>
-                <span class="chev">›</span>
+              <div class="ride-options">
+                <div class="ride-type active" data-type="uberx">
+                  <div class="ride-icon">🚗</div>
+                  <div class="ride-name">UberX</div>
+                  <div class="ride-desc">Affordable rides</div>
+                </div>
+                <div class="ride-type" data-type="comfort">
+                  <div class="ride-icon">🚙</div>
+                  <div class="ride-name">Comfort</div>
+                  <div class="ride-desc">Extra legroom</div>
+                </div>
+                <div class="ride-type" data-type="xl">
+                  <div class="ride-icon">🚐</div>
+                  <div class="ride-name">UberXL</div>
+                  <div class="ride-desc">6 seats</div>
+                </div>
+              </div>
+              
+              <div class="destination-input">
+                <div class="input-header">
+                  <h2>Where to?</h2>
+                </div>
+                <button id="btnOpenCustomize" class="destination-btn">
+                  <div class="destination-icon">🔍</div>
+                  <span class="destination-text">Enter your destination</span>
+                  <span class="arrow">→</span>
                 </button>
+              </div>
+              
+              <div class="quick-destinations">
+                <div class="quick-dest" id="quickHome">
+                  <div class="quick-icon">🏠</div>
+                  <span>Home</span>
+                </div>
+                <div class="quick-dest" id="quickWork">
+                  <div class="quick-icon">💼</div>
+                  <span>Work</span>
+                </div>
+                <div class="quick-dest" id="quickSaved">
+                  <div class="quick-icon">⭐</div>
+                  <span>Saved</span>
+                </div>
+              </div>
             </div>
-            </section>
-
+        </section>
 
         <!-- ============ Screen: Customize Ride ============ -->
         <section id="screen-customize" class="screen">
           <div class="toolbar">
             <button class="tool-back" id="backFromCustomize">‹</button>
-            <h2>Customize your ride</h2>
+            <h2>Plan your trip</h2>
             <div style="width:40px"></div>
           </div>
 
-          <div class="form panel">
-            <div class="radio-input active" data-kind="pickup">
-              <span class="radio"></span>
-              <input id="pickupInput" type="text" placeholder="Set your location" />
-              <button class="plus" title="Set via map" id="setPickupMap">+</button>
+          <div class="trip-inputs panel">
+            <div class="input-row pickup-row active" data-kind="pickup">
+              <div class="input-icon pickup-icon">🔵</div>
+              <input id="pickupInput" type="text" placeholder="Pickup location" />
+              <button class="map-btn" title="Set on map" id="setPickupMap">📍</button>
             </div>
-            <div class="radio-input" data-kind="destination">
-              <span class="radio"></span>
-              <input id="destInput" type="text" placeholder="Search for a location" />
-              <button class="plus" title="Set via map" id="setDestMap">+</button>
+            <div class="input-connector"></div>
+            <div class="input-row destination-row" data-kind="destination">
+              <div class="input-icon destination-icon">🔴</div>
+              <input id="destInput" type="text" placeholder="Where to?" />
+              <button class="map-btn" title="Set on map" id="setDestMap">📍</button>
             </div>
           </div>
 
           <div class="panel">
-            <h3>Saved addresses</h3>
-            <div class="chips">
-              <button class="chip" id="chipHome">🏠 Add home</button>
-              <button class="chip" id="chipWork">💼 Add work</button>
-              <button class="chip">＋ Other</button>
+            <h3>Saved places</h3>
+            <div class="saved-places">
+              <button class="saved-place" id="chipHome">
+                <div class="saved-icon">🏠</div>
+                <span>Add home</span>
+              </button>
+              <button class="saved-place" id="chipWork">
+                <div class="saved-icon">💼</div>
+                <span>Add work</span>
+              </button>
+              <button class="saved-place">
+                <div class="saved-icon">⭐</div>
+                <span>Add favorite</span>
+              </button>
             </div>
           </div>
 
-          <div class="panel list">
-            <button id="useCurrent" class="row-item">
-              <span class="ico">◎</span>
-              <span>Use my current location</span>
+          <div class="panel location-options">
+            <button id="useCurrent" class="location-option">
+              <div class="option-icon">📍</div>
+              <div class="option-content">
+                <div class="option-title">Use current location</div>
+                <div class="option-desc">Set pickup to your current position</div>
+              </div>
             </button>
-            <button id="chooseOnMap" class="row-item">
-              <span class="ico">🗺️</span>
-              <span>Choose on the map</span>
+            <button id="chooseOnMap" class="location-option">
+              <div class="option-icon">🗺️</div>
+              <div class="option-content">
+                <div class="option-title">Choose on map</div>
+                <div class="option-desc">Pin your location manually</div>
+              </div>
             </button>
           </div>
 
-          <button id="btnCustomizeNext" class="btn giant pri disabled">Next</button>
+          <button id="btnCustomizeNext" class="btn giant pri disabled">Confirm pickup</button>
         </section>
 
         <!-- ============ Screen: Pick on Map (full) ============ -->
         <section id="screen-pick" class="screen">
           <div class="toolbar">
             <button class="tool-back" id="backFromPick">‹</button>
-            <h2 id="pickTitle">Choose your destination</h2>
+            <h2 id="pickTitle">Set location</h2>
             <div style="width:40px"></div>
           </div>
           <div id="pickMap" class="map"></div>
 
-          <!-- Center pin -->
-          <div class="pin-wrap">
-            <div class="pin-dot"></div>
-            <div class="pin-ring"></div>
+          <!-- Enhanced center pin -->
+          <div class="map-pin">
+            <div class="pin-marker">
+              <div class="pin-head"></div>
+              <div class="pin-shadow"></div>
+            </div>
           </div>
 
           <div class="bottom-sheet">
-            <p id="pickedAddress" class="address">—</p>
-            <button id="btnPickContinue" class="btn giant pri">Continue</button>
+            <div class="selected-location">
+              <div class="location-icon">📍</div>
+              <div class="location-details">
+                <div class="location-title">Selected location</div>
+                <p id="pickedAddress" class="location-address">Move map to select location</p>
+              </div>
+            </div>
+            <button id="btnPickContinue" class="btn giant pri">Confirm location</button>
           </div>
-
-          
         </section>
 
         <!-- ============ Screen: Driver (Incoming Requests) ============ -->
-            <section id="screen-driver" class="screen">
+        <section id="screen-driver" class="screen">
             <div class="toolbar">
                 <button class="tool-back" id="backFromDriver">‹</button>
-                <h2>Driver — Requests</h2>
+                <h2>Driver Dashboard</h2>
                 <div style="width:40px"></div>
             </div>
 
-            <div id="driverList" class="driver-list panel" style="margin-top:10px;">
-                <!-- تُملأ من السكربت -->
+            <div class="driver-status panel">
+              <div class="status-indicator online"></div>
+              <div class="status-text">
+                <div class="status-title">You're online</div>
+                <div class="status-desc">Ready to accept ride requests</div>
+              </div>
+              <button class="status-toggle">Go offline</button>
             </div>
-            </section>
 
+            <div id="driverList" class="driver-list panel" style="margin-top:10px;">
+                <!-- Populated by script -->
+            </div>
+        </section>
       </div>
     </div>
 
